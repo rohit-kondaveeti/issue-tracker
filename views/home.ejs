@@ -1,0 +1,34 @@
+<!-- Form-->
+<div>
+    <form class="main-form" action="/create-issue" method="post">
+        <div class="row">
+          <div class="col">
+            <input type="text"  name="issuename" class="form-control" placeholder="Project Name" required>
+          </div>
+          <div class="col">
+            <input type="text" name="authorname" class="form-control" placeholder="Author name" required>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col">
+              <textarea type="text" name="description" class="form-control" placeholder="Description" required></textarea>
+            </div>
+            <div class="col" style="display: block;margin: auto;">
+              <input type="submit" class="form-control submit" value="Submit">
+            </div>
+          </div>
+      </form>
+</div>
+<!-- created Projects Details-->
+<div class="section-issues">
+  <h2>Projects</h2>
+  <% for(let i of issues){ %>
+  <div class="single-issue">
+    <h3><%= i.issuename %><a class="details-btn" href="/project/<%= i._id%>">view</a></h3>
+    <div class="content-issue">
+    <h4><%= i.authorname %></h4>
+    <p><%= i.description %></p>
+    </div>
+  </div>
+  <% } %>
+</div>

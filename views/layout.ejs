@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title><%= title %></title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js" ></script>
+        <%- style %>  
+    </head>
+    <Body>
+      <%- include('_header'); %>
+       <div class="container">
+       <%- body %>
+       </div>
+      <%- script %>
+    </Body>
+</html>

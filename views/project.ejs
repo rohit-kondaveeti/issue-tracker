@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+<!-- Search-->
+<div class="search-section">
+  <form action="/search" class="search-form" method="post">
+  <div class="row">
+    <div class="col-md-4">
+      <select id="choices-multiple-remove-button" name="tags" placeholder="Search by label" multiple>
+        <% for(let al of allissues){
+  const val = al.labels.split(',');
+  for(let singleLabel of val){
+  %><option value="<%=singleLabel%>"><%=singleLabel%></option><% 
+  }
+}
+  %>
+</select>
+</div>
+<div class="col-md-4">
+  <select name="title">
+    <option value="">Search by Title</option>
+    <% for(let al of allissues){
+  %><option value="<%=al.title%>"><%=al.title%></option><% 
+}
+  %>
+</select>
+<select name="author"  >
+  <option value="">Search by Author</option>
+  <% for(let al of allissues){
+%><option value="<%=al.author%>"><%=al.author%></option><% 
+}
+%>
+</select>
+</div>
+<div class="col-md-4">
+  <select name="description"  >
+    <option value="">Search by Description</option>
+    <% for(let al of allissues){
+  %><option name="description" value="<%=al.description%>"><%=al.description%></option><% 
+  }
+  %>
+  </select>
+  <input type="submit" class="btn btn-primary" value="Search" />
+</div>
+</div>
+
+</form>
+</div>
+<!-- project Details-->
+<div class="project-issue">
+ <h3>title: <%= project.issuename%></h3> 
+ <div class="content">
+    <h4 class="author">Author: <%= project.authorname%></h4>
+    <p class="desc"><%= project.description%></p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Click here to add issue
+    </a>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <!-- Issues Form -->
+         <form action="/single-issue" method="post">
+            <input type="hidden" name="issue_id" value="<%=project.id%>" />
+            <input type="text" name="title" placeholder="Enter title here" />
+            <input type="text" name="labels" placeholder="Enter labels here(with commas)" />
+            <input type="text" name="author" placeholder="Enter author here" />
+            <input type="text" name="description" placeholder="Enter description here" />
+            <input type="submit" class="submit-btn" value="Submit" />
+           </form>
+      </div>
+    </div>
+ </div> 
+
+ <hr>
+ <div class="issues">
+    <h4>Issues List</h4>
+    <div class="issue-points">
+      <% for(let issue of issues){ %>
+      <div class="single-issue-tab">
+    <h4><%=issue.title%></h4>
+    <p><%=issue.description%> - <span><%=issue.author%></span></p>
+    <p class="labels">
+      <% let label=issue.labels.split(",");
+        for(let l of label){
+      %>
+      <span><%=l %></span>
+   <% } %>
+   </p>
+    </div>
+    <% } %>
+  </div>
+    </div>
+ </div>
+</div>
+<script>
+  $(document).ready(function(){
+    var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+       removeItemButton: true,
+       maxItemCount:5,
+       searchResultLimit:5,
+       renderChoiceLimit:50
+     }); 
+});
+</script>
